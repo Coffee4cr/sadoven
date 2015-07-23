@@ -1,0 +1,22 @@
+{
+  "name": "sadoven",
+  "version": "1.0.0",
+  "description": "sf Website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coffee4cr/sadoven.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Coffee4cr/sadoven/issues"
+  },
+  "homepage": "https://github.com/Coffee4cr/sadoven#readme",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
