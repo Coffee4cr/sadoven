@@ -21,7 +21,7 @@ app.get("/",function(req,res){
 
 io.on('connection',function(socket){  
     console.log("A user is connected");
-    socket.emit('guild list',get_guilds(res));
+    socket.emit('guild list',get_guilds());
 });
 
 var get_guilds = function (callback) {
