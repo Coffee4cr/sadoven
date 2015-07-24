@@ -12,7 +12,7 @@
             socket.emit('status added',$("#comment").val());
           });*/
           socket.on('guild list',function(guild){
-            $("#show_comments").append(guilds + '<br /><br />');
+            $("#show_comments").append(guild + '<br /><br />');
           });
     });
     </script>
