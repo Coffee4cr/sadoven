@@ -25,7 +25,7 @@ io.on('connection',function(socket){
 });
 
 var get_guilds = function (callback) {
-   pool.getconnection(function(err,connection){
+   pool.getConnection(function(err,connection){
       if (err) {
          connection.release();
          callback(false);
