@@ -2,7 +2,7 @@ var express    = require('express');
 var mysql      = require('mysql');
 var app        = express();
 
-var connection = mysql.createPool({
+var pool = mysql.createPool({
   connectionLimit : 100,
   host     : 'localhost',
   user     : 'guildwars2',
