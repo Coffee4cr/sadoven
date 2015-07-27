@@ -44,6 +44,7 @@ var get_guilds = function (callback) {
                        "ON g.flag_id = e.id "), function(err, rows) {
          connection.release();
          if(!err) {
+            console.log(rows)
             callback(rows);
          }
       };
