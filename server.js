@@ -39,6 +39,7 @@ io.on('connection',function(socket){
                           "FROM guilds g "+
                           "JOIN guild_emblem_flags e "+
                           "ON g.flag_id = e.id "), function(err, rows) {
+                          console.log(rows);
             connection.release();
             if(!err) {
                console.log(JSON.parse(rows));
