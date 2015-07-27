@@ -24,7 +24,7 @@ io.on('connection',function(socket){
    socket.emit('guild list',function (data){
       pool.getConnection(function(err,connection){
          if (err) {
-            console.log('connection error');
+            console.log("connection error");
             connection.release();
             return;
          }
@@ -47,7 +47,7 @@ io.on('connection',function(socket){
             }
          };
          connection.on('error',function(err){
-            console.log('error in select');
+            console.log("error in select");
             return;
          });
       });
