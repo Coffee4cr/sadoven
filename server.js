@@ -24,6 +24,7 @@ io.on('connection',function(socket){
    socket.emit('guild list',function (data){
       pool.getConnection(function(err,connection){
          if (err) {
+            console.log('connection error');
             connection.release();
             return;
          }
