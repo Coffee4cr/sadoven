@@ -20,41 +20,38 @@ app.get("/",function(req,res){
 /*  This is auto initiated event when Client connects to Your Machine.  */
 
 io.on('connection',function(socket){  
-    console.log("A user is connected");
-    socket.emit('guild list',get_guilds);
-});
-
-var get_guilds = function (callback) {
-   pool.getConnection(function(err,connection){
-      if (err) {
-         connection.release();
-         callback(false);
-         return;
-      }
-      connection.query("SELECT g.guild_name, "+
-                       "       g.tag, "+
-                       "       e.background_id, "+
-                       "       e.foreground_id, "+
-                       "       e.background_color_id, "+
-                       "       e.foreground_primary_color_id, "+
-                       "       e.foreground_secondary_color_id, "+
-                       "       e.flags "+
-                       "FROM guilds g "+
-                       "JOIN guild_emblem_flags e "+
-                       "ON g.flag_id = e.id "), function(err, rows) {
-         connection.release();
-         if(!err) {
-            console.log(JSON.parse(rows));
-            callback(rows);
+   console.log("A user is connected");
+   socket.emit('guild list',function (data){
+      pool.getConnection(function(err,connection){
+         if (err) {
+            connection.release();
+            return;
          }
-      };
-      connection.on('error',function(err){
-         console.log('error in select');
-         callback(false);
-         return;
+         connection.query("SELECT g.guild_name, "+
+                          "       g.tag, "+
+                          "       e.background_id, "+
+                          "       e.foreground_id, "+
+                          "       e.background_color_id, "+
+                          "       e.foreground_primary_color_id, "+
+                          "       e.foreground_secondary_color_id, "+
+                          "       e.flags "+
+                          "FROM guilds g "+
+                          "JOIN guild_emblem_flags e "+
+                          "ON g.flag_id = e.id "), function(err, rows) {
+            connection.release();
+            if(!err) {
+               console.log(JSON.parse(rows));
+               data = JSON.parse(rows);
+               return data;
+            }
+         };
+         connection.on('error',function(err){
+            console.log('error in select');
+            return;
+         });
       });
    });
-}
+});
 
 http.listen(3000,function(){
     console.log("Listening on 3000");
