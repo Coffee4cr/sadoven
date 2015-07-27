@@ -21,7 +21,7 @@ app.get("/",function(req,res){
 
 io.on('connection',function(socket){  
    console.log("A user is connected");
-   socket.emit('guild list',function (data){
+   io.emit('guild list',function (data){
       pool.getConnection(function(err,connection){
          if (err) {
             console.log("connection error");
