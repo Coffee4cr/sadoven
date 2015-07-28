@@ -6,15 +6,19 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script>
-    $(document).ready(function(){
-          var socket = io();
-          /*$("#add_status").click(function(){
-            socket.emit('status added',$("#comment").val());
-          });*/
-          socket.on('init guilds',function(guild){
-            $("#show_comments").append(guild.guild_name + '<br /><br />');
-          });
-    });
+   $(document).ready(function(){
+      var socket = io.connect('http://localhost:3000');
+      /*$("#add_status").click(function(){
+        socket.emit('status added',$("#comment").val());
+      });*/
+      socket.on('init guilds',function(data){
+         var html = '<ul>';
+         for (var i=0; i<data.length;i++){
+            html += '<li>' + data[i].guild_name + ' ' + data[i].tag +'</li>';
+         }
+        $("#show_comments").append(html + '</ul>');
+      });
+   });
     </script>
   </head>
   <body>
