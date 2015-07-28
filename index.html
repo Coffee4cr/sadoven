@@ -17,7 +17,15 @@
       socket.on('init guilds',function(data){
          var html = '<ul>';
          for (var i=0; i<data.length;i++){
-            html += gw2emblem.init(data[i].tag,64);
+            html += gw2emblem.init('gw2embelm-div',64);
+            gw2emblem.drawEmblemGw2({
+    "background_id":2,
+    "foreground_id":103,
+    "flags":[],
+    "background_color_id":673,
+    "foreground_primary_color_id":443,
+    "foreground_secondary_color_id":473
+});
             
          }
         $("#show_comments").append(html + '</ul>');
