@@ -65,7 +65,8 @@ io.on('connection',function(socket){
       });
    } else {
       //Initial Notes already Exist
-      io.emit('init guilds',guilds);
+      //io.emit('init guilds',guilds);
+      return;
    }
 });
 http.listen(3000,function(){
