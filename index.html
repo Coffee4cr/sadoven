@@ -17,7 +17,8 @@
       socket.on('init guilds',function(data){
          var html = '<ul>';
          for (var i=0; i<data.length;i++){
-            html += '<li>' + data[i].guild_name + ' [' + data[i].tag +']</li>';
+            html += gw2emblem.init(data[i].tag,64);
+            
          }
         $("#show_comments").append(html + '</ul>');
       });
