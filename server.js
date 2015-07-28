@@ -17,14 +17,29 @@ app.get("/",function(req,res){
     res.sendFile(__dirname + '/index.html');
 });
 
+
+//Define/initialize our global
+var guilds = [];
+var isInitGuilds = false;
+var socketCount = 0;
+
 /*  This is auto initiated event when Client connects to Your Machine.  */
 
 io.on('connection',function(socket){  
-   console.log("A user is connected");
-   io.emit('guild list',function (data){
+   //Socket has connected, increase count
+   socketCount++;
+   console.log("A user is connected -- Total users: "+socketCount);
+   
+   io.on('disconnect',function(){
+      //Decrease socket count
+      socketCount--;
+      console.log('A user disconnected -- Total users: ' +socketCount);
+   });
+   
+   if (!isInitGuilds) {
+      //initial app start, get guilds
       pool.getConnection(function(err,connection){
          if (err) {
-            console.log("connection error");
             connection.release();
             return;
          }
@@ -38,23 +53,20 @@ io.on('connection',function(socket){
                           "       e.flags "+
                           "FROM guilds g "+
                           "JOIN guild_emblem_flags e "+
-                          "ON g.flag_id = e.id "), function(err, rows) {
-                          console.log(rows);
-            connection.release();
-            if(!err) {
-               console.log(JSON.parse(rows));
-               data = JSON.parse(rows);
-               return data;
-            }
-         };
-         connection.on('error',function(err){
-            console.log("error in select");
-            return;
-         });
+                          "ON g.flag_id = e.id ")
+                  .on('result', function(data){
+                     guilds.push(data);
+                  });
+                  .on('end',function(){
+                     io.emit('init guilds',guilds);
+                  });
       });
-   });
+      isInitGuilds = true;
+   } else {
+      //Initial Notes already Exist
+      io.emit('init guilds',guilds);
+   }
 });
-
 http.listen(3000,function(){
     console.log("Listening on 3000");
 });
