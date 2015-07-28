@@ -14,7 +14,7 @@
       socket.on('init guilds',function(data){
          var html = '<ul>';
          for (var i=0; i<data.length;i++){
-            html += '<li>' + data[i].guild_name + ' ' + data[i].tag +'</li>';
+            html += '<li>' + data[i].guild_name + ' [' + data[i].tag +']</li>';
          }
         $("#show_comments").append(html + '</ul>');
       });
@@ -24,12 +24,6 @@
   <body>
       <div
        id    = "show_comments"
-       class = "jumbotron"
-       style = "width: 38%;
-                height: 100%;
-                padding: 2%;
-                margin-left:5%;
-                margin-top:-53px;"
      >
       </div>
   </body>
