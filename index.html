@@ -15,11 +15,20 @@
         socket.emit('status added',$("#comment").val());
       });*/
       socket.on('init guilds',function(data){
-         var html = '<ul>';
+         var html = '';
          for (var i=0; i<data.length;i++){
-            html += '<li>' + data[i].guild_name + ' [' + data[i].tag +']</li>';
+            html += '<div id="'+data[i].tag+'-'+data[i].id+'">' + data[i].guild_name + ' [' + data[i].tag +']</div>';
+            gw2emblem.init(data[i].tag+'-'+data[i].id,64,'transparent');
+            gw2emblem.drawEmblemGw2({
+               "background_id":data[i].background_id,
+               "foreground_id":data[i].foreground_id,
+               "flags":[],
+               "background_color_id":data[i].background_color_id,
+               "foreground_primary_color_id":data[i].foreground_primary_color_id,
+               "foreground_secondary_color_id":data[i].foreground_secondary_color_id
+           });
          }
-        $("#show_comments").append(html + '</ul>');
+        $("#show_comments").append(html);
       });
    });
     </script>
@@ -31,7 +40,7 @@
       </div>
       <div id="gw2embelm-div"></div>
    <script>   
-      gw2emblem.init('gw2embelm-div',64);
+      gw2emblem.init('gw2embelm-div',64,'transparent');
             gw2emblem.drawEmblemGw2({
     "background_id":2,
     "foreground_id":103,

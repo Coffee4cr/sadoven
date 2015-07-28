@@ -50,7 +50,8 @@ io.on('connection',function(socket){
                           "       e.background_color_id, "+
                           "       e.foreground_primary_color_id, "+
                           "       e.foreground_secondary_color_id, "+
-                          "       e.flags "+
+                          "       e.flags, "+
+                          "       e.id "+
                           "FROM guilds g "+
                           "JOIN guild_emblem_flags e "+
                           "ON g.flag_id = e.id ")
