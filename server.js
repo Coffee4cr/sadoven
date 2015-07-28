@@ -60,13 +60,12 @@ io.on('connection',function(socket){
                   })
                   .on('end',function(){
                      io.emit('init guilds',guilds);
-                     isInitGuilds = true;
                   });
       });
+      isInitGuilds = true;
    } else {
       //Initial Notes already Exist
-      //io.emit('init guilds',guilds);
-      return;
+      io.emit('init guilds',guilds);
    }
 });
 http.listen(3000,function(){
