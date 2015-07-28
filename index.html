@@ -17,7 +17,7 @@
       socket.on('init guilds',function(data){
          var html = '';
          for (var i=0; i<data.length;i++){
-            html = '<div style="float:left;display:block;" id="'+data[i].tag+'-'+data[i].id+'" title="'+data[i].tag+'-'+data[i].id+'"alt="'+data[i].tag+'-'+data[i].id+'"></div>';
+            html = '<div style="float:left;display:block;" id="'+data[i].tag+'-'+data[i].id+'" title="'+'['+data[i].tag+']'+data[i].guild_name+'"alt="'+'['+data[i].tag+']'+data[i].guild_name+'"></div>';
             $("#show_comments").append(html);
             gw2emblem.init(data[i].tag+'-'+data[i].id,64,'transparent');
             gw2emblem.drawEmblemGw2({
