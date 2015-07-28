@@ -11,7 +11,7 @@
           /*$("#add_status").click(function(){
             socket.emit('status added',$("#comment").val());
           });*/
-          socket.on('guild list',function(guild){
+          socket.on('init guilds',function(guild){
             $("#show_comments").append(guild.guild_name + '<br /><br />');
           });
     });
