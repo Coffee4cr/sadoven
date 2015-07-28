@@ -56,7 +56,7 @@ io.on('connection',function(socket){
                           "ON g.flag_id = e.id ")
                   .on('result', function(data){
                      guilds.push(data);
-                  });
+                  })
                   .on('end',function(){
                      io.emit('init guilds',guilds);
                   });
